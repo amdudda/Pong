@@ -57,6 +57,11 @@ public class Main {
     static boolean gameOver;      //Used to work out what message, if any, to display on the screen
     static boolean removeInstructions = false;  // Same as above
 
+    // AMD: additional global variables used for scoring
+    static String lastPaddle;  // c for computer, h for human
+    static int humanScore = 0;
+    static int computerScore = 0;
+
     private static class GameDisplay extends JPanel {
 
         @Override
@@ -72,6 +77,7 @@ public class Main {
                 // AMD: Add prompt to quit or restart game
                 g.drawString("Press 'q' to quit or", 20, 60);
                 g.drawString("press the space bar for a new game.", 20, 75);
+                g.drawString("lastPaddle " + lastPaddle,20,90);
             }
 
             if (removeInstructions == false ) {
@@ -161,6 +167,7 @@ public class Main {
         private void restartGame() {
             // AMD: Restarts the game - keylistener will listen for SPACEBAR to restart.
             gameOver = false;
+            removeInstructions = true;
             timer.start();
             ballX = screenSize / 2;
             ballY = screenSize / 2;
@@ -265,13 +272,18 @@ public class Main {
 
         //If ballX is at a paddle AND ballY is within the paddle size.
         //Hit human paddle?
-        if (ballX >= screenSize-(paddleDistanceFromSide+(ballSize)) && (ballY > humanPaddleY-paddleSize && ballY < humanPaddleY+paddleSize))
+        if (ballX >= screenSize-(paddleDistanceFromSide+(ballSize)) && (ballY > humanPaddleY-paddleSize && ballY < humanPaddleY+paddleSize)) {
             hitHumanPaddle = true;
+            // AMD: set lastPaddle value to represent human
+            lastPaddle = "h";
+        }
 
         //Hit computer paddle?
-        if (ballX <= paddleDistanceFromSide && (ballY > computerPaddleY-paddleSize && ballY < computerPaddleY+paddleSize))
+        if (ballX <= paddleDistanceFromSide && (ballY > computerPaddleY-paddleSize && ballY < computerPaddleY+paddleSize)) {
             hitComputerPaddle = true;
-
+            // AMD: set lastPaddle value to represent computer
+            lastPaddle = "c";
+        }
 
         if (hitWall == true) {
             //bounce
