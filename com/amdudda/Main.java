@@ -10,9 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 
 //TODO have paddle speed affect ball's direction
 //TODO known issue - sometimes ball gets stuck behind human paddle
@@ -59,141 +56,12 @@ public class Main {
 
     // AMD: additional global variables used for scoring
     static String lastPaddle;  // c for computer, h for human
-    static int humanScore = 0;
-    static int computerScore = 0;
+
     // AMD: and a variable to track whether a game can be restarted - using gameOver
     // results in scoring-on-every-event and restart-at-all-spacebar-keyPressed bugs.
     static boolean restartable = false;
 
-    private static class GameDisplay extends JPanel {
 
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-
-            // System.out.println("* Repaint *");
-
-            if (gameOver == true) {
-                g.drawString("Game over!", 20, 30);
-                //AMD: commented this out to enable restart of game
-                // return;
-                // AMD: Add prompt to quit or restart game
-                g.drawString("Press 'q' to quit or", 20, 60);
-                g.drawString("press the space bar for a new game.", 20, 75);
-                // AMD: update game scores and report who won.
-                String winner;
-                if (lastPaddle.equals("c")) {
-                    winner = "The computer wins!";
-                    computerScore++;
-                }
-                else {
-                    winner = "You win!";
-                    humanScore++;
-                }
-                g.drawString(winner,20,120);
-                g.drawString("Current score:", 20,135);
-                g.drawString("Computer: " + computerScore + " points.",40,150);
-                g.drawString("You: " + humanScore + " points.",40,165);
-                // AMD: update our restartable and gameover flags
-                restartable = true;
-                gameOver = false;
-            }
-
-            if (removeInstructions == false ) {
-                // AMD: set the current drawing color to green
-                g.setColor(Color.green);
-                g.drawString("Pong! Press up or down to move", 20, 30);
-                g.drawString("Press q to quit", 20, 60);
-            }
-
-            g.setColor(Color.blue);
-
-            //While game is playing, these methods draw the ball, paddles, using the global variables
-            //Other parts of the code will modify these variables
-
-            //Ball - a circle is just an oval with the height equal to the width
-            /* AMD:
-                Set the drawing color to red, use fill oval instead of drawOval,
-                and then reset the color back to blue.
-             */
-            g.setColor(Color.red);
-            g.drawOval((int) ballX, (int) ballY, ballSize, ballSize);
-            g.fillOval((int) ballX, (int) ballY, ballSize, ballSize);
-            g.setColor(Color.blue);
-            //Computer paddle
-            g.drawLine(paddleDistanceFromSide, computerPaddleY - paddleSize, paddleDistanceFromSide, computerPaddleY + paddleSize);
-            //Human paddle
-            g.drawLine(screenSize - paddleDistanceFromSide, humanPaddleY - paddleSize, screenSize - paddleDistanceFromSide, humanPaddleY + paddleSize);
-            
-        }
-    }
-
-    //Listen for user pressing a key, and moving human paddle in response
-    private static class KeyHandler implements KeyListener {
-        
-        @Override
-        public void keyTyped(KeyEvent ev) {
-            char keyPressed = ev.getKeyChar();
-            char q = 'q';
-            if( keyPressed == q){
-                System.exit(0);    //quit if user presses the q key.
-            }
-        }
-        
-        @Override
-        public void keyReleased(KeyEvent ev) {}   //Don't need this one, but required to implement it.
-        
-        @Override
-        public void keyPressed(KeyEvent ev) {
-
-            removeInstructions = true;   //game has started
-
-            if (ev.getKeyCode() == KeyEvent.VK_DOWN) {
-                // AMD: commented out: System.out.println("down key");
-                moveDown();
-            }
-            if (ev.getKeyCode() == KeyEvent.VK_UP) {
-                // AMD: commented out: System.out.println("up key");
-                moveUp();
-            }
-            // AMD: added handler to detect spacebar
-            if (ev.getKeyCode() == KeyEvent.VK_SPACE) {
-                //restart the game if gameOver is true
-                if (restartable) {
-                    restartGame();
-                }
-            }
-
-            //ev.getComponent() returns the GUI component that generated this event
-            //In this case, it will be GameDisplay JPanel
-            ev.getComponent().repaint();   //This calls paintComponent(Graphics g) again
-        }
-        
-        private void moveDown() {
-            //Coordinates decrease as you go up the screen, that's why this looks backwards.
-            if (humanPaddleY < screenSize - paddleSize) {
-                humanPaddleY+=humanPaddleMaxSpeed;
-            }
-        }
-        
-        private void moveUp() {
-            //Coordinates increase as you go down the screen, that's why this looks backwards.
-            if (humanPaddleY > paddleSize) {
-                humanPaddleY-=humanPaddleMaxSpeed;
-            }
-        }
-
-        private void restartGame() {
-            // AMD: Restarts the game - keylistener will listen for SPACEBAR to restart.
-            restartable = false;
-            timer.start();
-            ballX = screenSize / 2;
-            ballY = screenSize / 2;
-        }
-
-    }
-
-    
     public static void main(String[] args) {
         
         gamePanel = new GameDisplay();
