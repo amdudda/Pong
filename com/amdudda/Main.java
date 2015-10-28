@@ -22,8 +22,8 @@ public class Main {
     static int screenSize = 300;    //and width - screen is square
     static int paddleSize = 25;     //Actually half the paddle size - how much to draw on each side of center
     static int paddleDistanceFromSide = 10;  //How much space between each paddle and side of screen
-    
-    static int gameSpeed = 75;  //How many milliseconds between clock ticks? Reduce this to speed up game
+    // AMD: changed gamespeed from 75 to 25 to speed up testing.
+    static int gameSpeed = 25;  //How many milliseconds between clock ticks? Reduce this to speed up game
     
     static int computerPaddleY = screenSize / 2 ;    //location of the center of the paddles on the Y-axis of the screen
     static int humanPaddleY = screenSize / 2 ;
@@ -63,11 +63,15 @@ public class Main {
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
 
-            //System.out.println("* Repaint *");
+            // System.out.println("* Repaint *");
 
             if (gameOver == true) {
-                g.drawString( "Game over!", 20, 30 );
-                return;
+                g.drawString("Game over!", 20, 30);
+                //AMD: commented this out to enable restart of game
+                // return;
+                // AMD: Add prompt to quit or restart game
+                g.drawString("Press 'q' to quit or", 20, 60);
+                g.drawString("press the space bar for a new game.", 20, 75);
             }
 
             if (removeInstructions == false ) {
@@ -120,12 +124,19 @@ public class Main {
             removeInstructions = true;   //game has started
 
             if (ev.getKeyCode() == KeyEvent.VK_DOWN) {
-                System.out.println("down key");
+                // AMD: commented out: System.out.println("down key");
                 moveDown();
             }
             if (ev.getKeyCode() == KeyEvent.VK_UP) {
-                System.out.println("up key");
+                // AMD: commented out: System.out.println("up key");
                 moveUp();
+            }
+            // AMD: added handler to detect spacebar
+            if (ev.getKeyCode() == KeyEvent.VK_SPACE) {
+                //restart the game if gameOver is true
+                if (gameOver) {
+                    restartGame();
+                }
             }
 
             //ev.getComponent() returns the GUI component that generated this event
@@ -145,6 +156,14 @@ public class Main {
             if (humanPaddleY > paddleSize) {
                 humanPaddleY-=humanPaddleMaxSpeed;
             }
+        }
+
+        private void restartGame() {
+            // AMD: Restarts the game - keylistener will listen for SPACEBAR to restart.
+            gameOver = false;
+            timer.start();
+            ballX = screenSize / 2;
+            ballY = screenSize / 2;
         }
 
     }
@@ -206,7 +225,7 @@ public class Main {
         int ballPaddleDifference = computerPaddleY - (int)ballY;
         int distanceToMove = Math.min(Math.abs(ballPaddleDifference), computerPaddleMaxSpeed);
 
-        System.out.println("computer paddle speed = " + computerPaddleSpeed);
+        // AMD: commented out: System.out.println("computer paddle speed = " + computerPaddleSpeed);
 
         if (ballPaddleDifference > 0 ) {   //Difference is positive - paddle is below ball on screen
             computerPaddleY -= distanceToMove;
@@ -225,7 +244,7 @@ public class Main {
     //If so, bounce off the wall/paddle
     //And then move ball in the correct direction
     protected static void moveBall() {
-        System.out.println("move ball");
+        // AMD: commented out: System.out.println("move ball");
         //move in current direction
         //bounce off walls and paddle
         //TODO Take into account speed of paddles
@@ -287,6 +306,8 @@ public class Main {
         // ** TRIGONOMETRY END **
 
     }
+
+
 }
 
 
