@@ -61,6 +61,9 @@ public class Main {
     static String lastPaddle;  // c for computer, h for human
     static int humanScore = 0;
     static int computerScore = 0;
+    // AMD: and a variable to track whether a game can be restarted - using gameOver
+    // results in scoring-on-every-event and restart-at-all-spacebar-keyPressed bugs.
+    static boolean restartable = false;
 
     private static class GameDisplay extends JPanel {
 
@@ -77,7 +80,23 @@ public class Main {
                 // AMD: Add prompt to quit or restart game
                 g.drawString("Press 'q' to quit or", 20, 60);
                 g.drawString("press the space bar for a new game.", 20, 75);
-                g.drawString("lastPaddle " + lastPaddle,20,90);
+                // AMD: update game scores and report who won.
+                String winner;
+                if (lastPaddle.equals("c")) {
+                    winner = "The computer wins!";
+                    computerScore++;
+                }
+                else {
+                    winner = "You win!";
+                    humanScore++;
+                }
+                g.drawString(winner,20,120);
+                g.drawString("Current score:", 20,135);
+                g.drawString("Computer: " + computerScore + " points.",40,150);
+                g.drawString("You: " + humanScore + " points.",40,165);
+                // AMD: update our restartable and gameover flags
+                restartable = true;
+                gameOver = false;
             }
 
             if (removeInstructions == false ) {
@@ -140,7 +159,7 @@ public class Main {
             // AMD: added handler to detect spacebar
             if (ev.getKeyCode() == KeyEvent.VK_SPACE) {
                 //restart the game if gameOver is true
-                if (gameOver) {
+                if (restartable) {
                     restartGame();
                 }
             }
@@ -166,8 +185,7 @@ public class Main {
 
         private void restartGame() {
             // AMD: Restarts the game - keylistener will listen for SPACEBAR to restart.
-            gameOver = false;
-            removeInstructions = true;
+            restartable = false;
             timer.start();
             ballX = screenSize / 2;
             ballY = screenSize / 2;
