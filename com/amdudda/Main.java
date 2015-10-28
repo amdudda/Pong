@@ -1,4 +1,10 @@
-package com.clara;
+package com.amdudda;
+
+/*
+    code forked from https://github.com/minneapolis-edu/Pong
+    Added code commented and prefixed with AMD:
+*/
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -65,6 +71,8 @@ public class Main {
             }
 
             if (removeInstructions == false ) {
+                // AMD: set the current drawing color to green
+                g.setColor(Color.green);
                 g.drawString("Pong! Press up or down to move", 20, 30);
                 g.drawString("Press q to quit", 20, 60);
             }
@@ -75,7 +83,14 @@ public class Main {
             //Other parts of the code will modify these variables
 
             //Ball - a circle is just an oval with the height equal to the width
-            g.drawOval((int)ballX, (int)ballY, ballSize, ballSize);
+            /* AMD:
+                Set the drawing color to red, use fill oval instead of drawOval,
+                and then reset the color back to blue.
+             */
+            g.setColor(Color.red);
+            g.drawOval((int) ballX, (int) ballY, ballSize, ballSize);
+            g.fillOval((int) ballX, (int) ballY, ballSize, ballSize);
+            g.setColor(Color.blue);
             //Computer paddle
             g.drawLine(paddleDistanceFromSide, computerPaddleY - paddleSize, paddleDistanceFromSide, computerPaddleY + paddleSize);
             //Human paddle
