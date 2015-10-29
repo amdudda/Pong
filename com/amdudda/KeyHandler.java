@@ -49,15 +49,15 @@ public class KeyHandler implements KeyListener {
 
     private void moveDown() {
         //Coordinates decrease as you go up the screen, that's why this looks backwards.
-        if (Main.humanPaddleY < Main.screenSize - Main.paddleSize) {
-            Main.humanPaddleY+=Main.humanPaddleMaxSpeed;
+        if (HumanPaddle.PaddleY < Main.screenSize - HumanPaddle.paddleSize) {
+            HumanPaddle.PaddleY+=HumanPaddle.PaddleMaxSpeed;
         }
     }
 
     private void moveUp() {
         //Coordinates increase as you go down the screen, that's why this looks backwards.
-        if (Main.humanPaddleY > Main.paddleSize) {
-            Main.humanPaddleY-=Main.humanPaddleMaxSpeed;
+        if (HumanPaddle.PaddleY > HumanPaddle.paddleSize) {
+            HumanPaddle.PaddleY-=HumanPaddle.PaddleMaxSpeed;
         }
     }
 

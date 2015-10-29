@@ -6,6 +6,9 @@ package com.amdudda;
 public abstract class Paddle {
 
     protected int score = 0;
+    static int paddleSize = 25;     //Actually half the paddle size - how much to draw on each side of center
+    static int paddleDistanceFromSide = 10;  //How much space between each paddle and side of screen
+
 
     // no constructor
 
@@ -21,6 +24,6 @@ public abstract class Paddle {
 
     // and an incrementer for score
     public void addPoint() {
-        ++this.score;
+        this.score++;
     }
 }

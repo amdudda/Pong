@@ -17,17 +17,10 @@ import java.awt.event.ActionListener;
 public class Main {
 
     static int screenSize = 300;    //and width - screen is square
-    static int paddleSize = 25;     //Actually half the paddle size - how much to draw on each side of center
-    static int paddleDistanceFromSide = 10;  //How much space between each paddle and side of screen
-    // AMD: changed gamespeed from 75 to 25 to speed up testing.
+     // AMD: changed gamespeed from 75 to 25 to speed up testing.
     static int gameSpeed = 25;  //How many milliseconds between clock ticks? Reduce this to speed up game
     
-   static int humanPaddleY = screenSize / 2 ;
-    
-    static int humanPaddleMaxSpeed = 5;   //This doesn't quite do the same thing... this is how many pixels human moves per key press TODO use this in a better way
-    
-    static int humanPaddleSpeed = 0;      // "speed" is pixels moved up or down per clock tick
-
+   
     
 
 
@@ -89,36 +82,6 @@ public class Main {
         timer = new Timer(gameSpeed, gameUpdater);
         timer.start();    //Every time the timer ticks, the actionPerformed method of the ActionListener is called
     }
-
-    /*//Uses the current position of ball and paddle to move the computer paddle towards the ball
-    protected static void moveComputerPaddle(){
-
-        //if ballY = 100 and paddleY is 50, difference = 50, need to adjust
-        //paddleY by up to the max speed (the minimum of difference and maxSpeed)
-
-        //if ballY = 50 and paddleY = 100 then difference = -50
-        //Need to move paddleY down by the max speed
-
-        int ballPaddleDifference = computerPaddleY - (int) Ball.ballY;
-        int distanceToMove = Math.min(Math.abs(ballPaddleDifference), computerPaddleMaxSpeed);
-
-        // AMD: commented out: System.out.println("computer paddle speed = " + computerPaddleSpeed);
-
-        if (ballPaddleDifference > 0 ) {   //Difference is positive - paddle is below ball on screen
-            computerPaddleY -= distanceToMove;
-
-        } else if (ballPaddleDifference < 0){
-            computerPaddleY += distanceToMove;
-
-        } else {
-            //Ball and paddle are aligned. Don't need to move!
-            computerPaddleSpeed = 0;
-        }
-
-    }
-*/
-
-
 
 }
 

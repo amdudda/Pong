@@ -66,9 +66,9 @@ public class GameDisplay extends JPanel {
             g.fillOval((int) Ball.ballX, (int) Ball.ballY, Ball.ballSize, Ball.ballSize);
             g.setColor(Color.blue);
             //Computer paddle
-            g.drawLine(Main.paddleDistanceFromSide, ComputerPaddle.PaddleY - Main.paddleSize, Main.paddleDistanceFromSide, ComputerPaddle.PaddleY + Main.paddleSize);
+            g.drawLine(ComputerPaddle.paddleDistanceFromSide, ComputerPaddle.PaddleY - ComputerPaddle.paddleSize, ComputerPaddle.paddleDistanceFromSide, ComputerPaddle.PaddleY + ComputerPaddle.paddleSize);
             //Human paddle
-            g.drawLine(Main.screenSize - Main.paddleDistanceFromSide, Main.humanPaddleY - Main.paddleSize, Main.screenSize - Main.paddleDistanceFromSide, Main.humanPaddleY + Main.paddleSize);
+            g.drawLine(Main.screenSize - HumanPaddle.paddleDistanceFromSide, HumanPaddle.PaddleY - HumanPaddle.paddleSize, Main.screenSize - HumanPaddle.paddleDistanceFromSide, HumanPaddle.PaddleY + HumanPaddle.paddleSize);
 
         }
     }

@@ -57,14 +57,14 @@ public class Ball {
 
         //If ballX is at a paddle AND ballY is within the paddle size.
         //Hit human paddle?
-        if (ballX >= scrnsz-(Main.paddleDistanceFromSide+(ballSize)) && (ballY > Main.humanPaddleY-Main.paddleSize && ballY < Main.humanPaddleY+Main.paddleSize)) {
+        if (ballX >= scrnsz-(HumanPaddle.paddleDistanceFromSide+(ballSize)) && (ballY > HumanPaddle.PaddleY-HumanPaddle.paddleSize && ballY < HumanPaddle.PaddleY+HumanPaddle.paddleSize)) {
             hitHumanPaddle = true;
             // AMD: set lastPaddle value to represent human
             Main.lastPaddle = "h";
         }
 
         //Hit computer paddle?
-        if (ballX <= Main.paddleDistanceFromSide && (ballY > ComputerPaddle.PaddleY-Main.paddleSize && ballY < ComputerPaddle.PaddleY+Main.paddleSize)) {
+        if (ballX <= ComputerPaddle.paddleDistanceFromSide && (ballY > ComputerPaddle.PaddleY-ComputerPaddle.paddleSize && ballY < ComputerPaddle.PaddleY+ComputerPaddle.paddleSize)) {
             hitComputerPaddle = true;
             // AMD: set lastPaddle value to represent computer
             Main.lastPaddle = "c";
