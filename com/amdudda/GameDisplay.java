@@ -33,6 +33,8 @@ public class GameDisplay extends JPanel {
                 if (Main.lastPaddle.equals("c")) {
                     winner = "The computer wins!";
                     computerScore++;
+                    // AMD: need to puzzle out why this doesn't work
+                    // ComputerPaddle.addPoint();
                 }
                 else {
                     winner = "You win!";
