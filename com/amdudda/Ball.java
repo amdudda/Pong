@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Ball {
 
-    static double scrnsz = Main.screenSize;
+    private static double scrnsz = Main.screenSize;
     static double  ballX = scrnsz / 2;   //Imagine the ball is in a square box. These are the coordinates of the top of that box.
     static double  ballY = scrnsz / 2;   //So this starts the ball in (roughly) the center of the screen
     static int ballSize = 10;                //Diameter of ball
@@ -29,7 +29,7 @@ public class Ball {
 
     // fetches location of a ball
     public void getLocation() {
-        // TODO: return a set of values that can be used to draw a ball.
+        // TODO: return a set of values that can be used to draw a ball.  Or should I make the ball draw itself?
 
     }
 
