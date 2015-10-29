@@ -31,21 +31,7 @@ public class Main {
     static int humanPaddleSpeed = 0;      // "speed" is pixels moved up or down per clock tick
     static int computerPaddleSpeed = 0;   // same
     
-    static double  ballX = screenSize / 2;   //Imagine the ball is in a square box. These are the coordinates of the top of that box.
-    static double  ballY = screenSize / 2;   //So this starts the ball in (roughly) the center of the screen
-    static int ballSize = 10;                //Diameter of ball
-    
-    static double ballSpeed = 5;   //Again, pixels moved per clock tick
 
-
-    //An angle in radians (which range from 0 to 2xPI (0 to about 6.3).
-    //This starts the ball moving down toward the human. Replace with some of the other
-    //commented out versions for a different start angle
-    //set this to whatever you want (but helps if you angle towards a player)
-    static double ballDirection = Math.PI + 1;   //heading left and up
-    //static double ballDirection = 1;
-    //static double ballDirection = 0;   //heading right
-    //static double ballDirection = Math.PI;   //heading left
 
     static Timer timer;    //Ticks every *gameSpeed* milliseconds. Every time it ticks, the ball and computer paddle move
 
@@ -92,7 +78,7 @@ public class Main {
                 //It's containing class is Main
                 //moveBall() and moveComputerPaddle belong to the outer class - Main
                 //So we have to say Main.moveBall() to refer to these methods
-                Main.moveBall();
+                Ball.moveBall();
                 Main.moveComputerPaddle();
 
                 if (gameOver) {
@@ -115,7 +101,7 @@ public class Main {
         //if ballY = 50 and paddleY = 100 then difference = -50
         //Need to move paddleY down by the max speed
 
-        int ballPaddleDifference = computerPaddleY - (int)ballY;
+        int ballPaddleDifference = computerPaddleY - (int) Ball.ballY;
         int distanceToMove = Math.min(Math.abs(ballPaddleDifference), computerPaddleMaxSpeed);
 
         // AMD: commented out: System.out.println("computer paddle speed = " + computerPaddleSpeed);
@@ -133,77 +119,7 @@ public class Main {
 
     }
 
-    //Checks to see if the ball has hit a wall or paddle
-    //If so, bounce off the wall/paddle
-    //And then move ball in the correct direction
-    protected static void moveBall() {
-        // AMD: commented out: System.out.println("move ball");
-        //move in current direction
-        //bounce off walls and paddle
-        //TODO Take into account speed of paddles
 
-        //Work in double
-
-        boolean hitWall = false;
-        boolean hitHumanPaddle = false;
-        boolean hitComputerPaddle = false;
-
-        if (ballX <= 0 || ballX >= screenSize ) {
-            gameOver = true;
-            return;
-        }
-        if (ballY <= 0 || ballY >= screenSize-ballSize) {
-            hitWall = true;
-        }
-
-        //If ballX is at a paddle AND ballY is within the paddle size.
-        //Hit human paddle?
-        if (ballX >= screenSize-(paddleDistanceFromSide+(ballSize)) && (ballY > humanPaddleY-paddleSize && ballY < humanPaddleY+paddleSize)) {
-            hitHumanPaddle = true;
-            // AMD: set lastPaddle value to represent human
-            lastPaddle = "h";
-        }
-
-        //Hit computer paddle?
-        if (ballX <= paddleDistanceFromSide && (ballY > computerPaddleY-paddleSize && ballY < computerPaddleY+paddleSize)) {
-            hitComputerPaddle = true;
-            // AMD: set lastPaddle value to represent computer
-            lastPaddle = "c";
-        }
-
-        if (hitWall == true) {
-            //bounce
-            ballDirection = ( (2 * Math.PI) - ballDirection );
-            System.out.println("ball direction " + ballDirection);
-        }
-
-        //Bounce off computer paddle - just need to modify direction
-        if (hitComputerPaddle == true) {
-            ballDirection = (Math.PI) - ballDirection;
-            //TODO factor in speed into new direction
-            //TODO So if paddle is moving down quickly, the ball will angle more down too
-
-        }
-
-        //Bounce off computer paddle - just need to modify direction
-        if (hitHumanPaddle == true) {
-            ballDirection = (Math.PI) - ballDirection;
-            //TODO consider speed of paddle
-        }
-
-        //Now, move ball correct distance in the correct direction
-
-        // ** TRIGONOMETRY **
-
-        //distance to move in the X direction is ballSpeed * cos(ballDirection)
-        //distance to move in the Y direction is ballSpeed * sin(ballDirection)
-
-        ballX = ballX + (ballSpeed * Math.cos(ballDirection));
-        ballY = ballY + (ballSpeed * Math.sin(ballDirection));
-
-        // ** TRIGONOMETRY END **
-
-    }
 
 
 }

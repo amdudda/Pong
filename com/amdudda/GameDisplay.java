@@ -62,8 +62,8 @@ public class GameDisplay extends JPanel {
                 and then reset the color back to blue.
              */
             g.setColor(Color.red);
-            g.drawOval((int) Main.ballX, (int) Main.ballY, Main.ballSize, Main.ballSize);
-            g.fillOval((int) Main.ballX, (int) Main.ballY, Main.ballSize, Main.ballSize);
+            g.drawOval((int) Ball.ballX, (int) Ball.ballY, Ball.ballSize, Ball.ballSize);
+            g.fillOval((int) Ball.ballX, (int) Ball.ballY, Ball.ballSize, Ball.ballSize);
             g.setColor(Color.blue);
             //Computer paddle
             g.drawLine(Main.paddleDistanceFromSide, Main.computerPaddleY - Main.paddleSize, Main.paddleDistanceFromSide, Main.computerPaddleY + Main.paddleSize);

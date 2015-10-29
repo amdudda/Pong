@@ -65,7 +65,7 @@ public class KeyHandler implements KeyListener {
         // AMD: Restarts the game - keylistener will listen for SPACEBAR to restart.
         Main.restartable = false;
         Main.timer.start();
-        Main.ballX = Main.screenSize / 2;
-        Main.ballY = Main.screenSize / 2;
+        Ball.ballX = Main.screenSize / 2;
+        Ball.ballY = Main.screenSize / 2;
     }
 }
