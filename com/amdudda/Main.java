@@ -22,14 +22,12 @@ public class Main {
     // AMD: changed gamespeed from 75 to 25 to speed up testing.
     static int gameSpeed = 25;  //How many milliseconds between clock ticks? Reduce this to speed up game
     
-    static int computerPaddleY = screenSize / 2 ;    //location of the center of the paddles on the Y-axis of the screen
-    static int humanPaddleY = screenSize / 2 ;
+   static int humanPaddleY = screenSize / 2 ;
     
-    static int computerPaddleMaxSpeed = 3;   //Max number of pixels that computer paddle can move clock tick. Higher number = easier for computer
     static int humanPaddleMaxSpeed = 5;   //This doesn't quite do the same thing... this is how many pixels human moves per key press TODO use this in a better way
     
     static int humanPaddleSpeed = 0;      // "speed" is pixels moved up or down per clock tick
-    static int computerPaddleSpeed = 0;   // same
+
     
 
 
@@ -79,7 +77,7 @@ public class Main {
                 //moveBall() and moveComputerPaddle belong to the outer class - Main
                 //So we have to say Main.moveBall() to refer to these methods
                 Ball.moveBall();
-                Main.moveComputerPaddle();
+                ComputerPaddle.movePaddle();
 
                 if (gameOver) {
                     timer.stop();
@@ -92,7 +90,7 @@ public class Main {
         timer.start();    //Every time the timer ticks, the actionPerformed method of the ActionListener is called
     }
 
-    //Uses the current position of ball and paddle to move the computer paddle towards the ball
+    /*//Uses the current position of ball and paddle to move the computer paddle towards the ball
     protected static void moveComputerPaddle(){
 
         //if ballY = 100 and paddleY is 50, difference = 50, need to adjust
@@ -118,7 +116,7 @@ public class Main {
         }
 
     }
-
+*/
 
 
 

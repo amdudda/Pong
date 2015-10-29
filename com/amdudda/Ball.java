@@ -64,7 +64,7 @@ public class Ball {
         }
 
         //Hit computer paddle?
-        if (ballX <= Main.paddleDistanceFromSide && (ballY > Main.computerPaddleY-Main.paddleSize && ballY < Main.computerPaddleY+Main.paddleSize)) {
+        if (ballX <= Main.paddleDistanceFromSide && (ballY > ComputerPaddle.PaddleY-Main.paddleSize && ballY < ComputerPaddle.PaddleY+Main.paddleSize)) {
             hitComputerPaddle = true;
             // AMD: set lastPaddle value to represent computer
             Main.lastPaddle = "c";
