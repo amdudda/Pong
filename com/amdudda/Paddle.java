@@ -5,7 +5,9 @@ package com.amdudda;
  */
 public abstract class Paddle {
 
+    // AMD:  variable used for scoring
     protected int score = 0;
+    // variables from original version of code.
     static int paddleSize = 25;     //Actually half the paddle size - how much to draw on each side of center
     static int paddleDistanceFromSide = 10;  //How much space between each paddle and side of screen
 

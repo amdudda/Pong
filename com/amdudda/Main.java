@@ -25,11 +25,6 @@ public class Main {
     
     static boolean gameOver;      //Used to work out what message, if any, to display on the screen
 
-    // AMD: additional global variables used for scoring
-    static String lastPaddle;  // c for computer, h for human
-
-
-
 
     public static void main(String[] args) {
         

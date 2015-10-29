@@ -14,7 +14,8 @@ public class Ball {
     static int ballSize = 10;                //Diameter of ball
 
     static double ballSpeed = 5;   //Again, pixels moved per clock tick
-
+    // ball needs to remember which paddle it last touched.
+    protected static String lastPaddle;  // c for computer, h for human
 
     //An angle in radians (which range from 0 to 2xPI (0 to about 6.3).
     //This starts the ball moving down toward the human. Replace with some of the other
@@ -60,14 +61,14 @@ public class Ball {
         if (ballX >= scrnsz-(HumanPaddle.paddleDistanceFromSide+(ballSize)) && (ballY > HumanPaddle.PaddleY-HumanPaddle.paddleSize && ballY < HumanPaddle.PaddleY+HumanPaddle.paddleSize)) {
             hitHumanPaddle = true;
             // AMD: set lastPaddle value to represent human
-            Main.lastPaddle = "h";
+            lastPaddle = "h";
         }
 
         //Hit computer paddle?
         if (ballX <= ComputerPaddle.paddleDistanceFromSide && (ballY > ComputerPaddle.PaddleY-ComputerPaddle.paddleSize && ballY < ComputerPaddle.PaddleY+ComputerPaddle.paddleSize)) {
             hitComputerPaddle = true;
             // AMD: set lastPaddle value to represent computer
-            Main.lastPaddle = "c";
+            lastPaddle = "c";
         }
 
         if (hitWall == true) {

@@ -30,7 +30,7 @@ public class GameDisplay extends JPanel {
                 g.drawString("press the space bar for a new game.", 20, 75);
                 // AMD: update game scores and report who won.
                 String winner;
-                if (Main.lastPaddle.equals("c")) {
+                if (Ball.lastPaddle.equals("c")) {
                     winner = "The computer wins!";
                     computerScore++;
                     // AMD: need to puzzle out why this doesn't work
