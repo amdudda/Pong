@@ -19,24 +19,16 @@ public class Main {
     static int screenSize = 300;    //and width - screen is square
      // AMD: changed gamespeed from 75 to 25 to speed up testing.
     static int gameSpeed = 25;  //How many milliseconds between clock ticks? Reduce this to speed up game
-    
-   
-    
-
-
     static Timer timer;    //Ticks every *gameSpeed* milliseconds. Every time it ticks, the ball and computer paddle move
 
     static GameDisplay gamePanel;   //draw the game components here
     
     static boolean gameOver;      //Used to work out what message, if any, to display on the screen
-    static boolean removeInstructions = false;  // Same as above
 
     // AMD: additional global variables used for scoring
     static String lastPaddle;  // c for computer, h for human
 
-    // AMD: and a variable to track whether a game can be restarted - using gameOver
-    // results in scoring-on-every-event and restart-at-all-spacebar-keyPressed bugs.
-    static boolean restartable = false;
+
 
 
     public static void main(String[] args) {

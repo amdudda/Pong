@@ -10,7 +10,10 @@ public class GameDisplay extends JPanel {
 
     static int humanScore = 0;
     static int computerScore = 0;
-
+    static boolean removeInstructions = false;  // Same as above
+    // AMD: and a variable to track whether a game can be restarted - using gameOver
+    // results in scoring-on-every-event and restart-at-all-spacebar-keyPressed bugs.
+    static boolean restartable = false;
 
         @Override
         public void paintComponent(Graphics g) {
@@ -40,11 +43,11 @@ public class GameDisplay extends JPanel {
                 g.drawString("Computer: " + computerScore + " points.",40,150);
                 g.drawString("You: " + humanScore + " points.",40,165);
                 // AMD: update our restartable and gameover flags
-                Main.restartable = true;
+                restartable = true;
                 Main.gameOver = false;
             }
 
-            if (Main.removeInstructions == false ) {
+            if (removeInstructions == false ) {
                 // AMD: set the current drawing color to green
                 g.setColor(Color.green);
                 g.drawString("Pong! Press up or down to move", 20, 30);
@@ -71,4 +74,13 @@ public class GameDisplay extends JPanel {
             g.drawLine(Main.screenSize - HumanPaddle.paddleDistanceFromSide, HumanPaddle.PaddleY - HumanPaddle.paddleSize, Main.screenSize - HumanPaddle.paddleDistanceFromSide, HumanPaddle.PaddleY + HumanPaddle.paddleSize);
 
         }
+
+    protected static void restartGame() {
+        // AMD: Restarts the game - keylistener will listen for SPACEBAR to restart.
+        GameDisplay.restartable = false;
+        Main.timer.start();
+        Ball.ballX = Main.screenSize / 2;
+        Ball.ballY = Main.screenSize / 2;
+    }
+
     }

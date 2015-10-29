@@ -24,21 +24,21 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent ev) {
 
-        Main.removeInstructions = true;   //game has started
+        GameDisplay.removeInstructions = true;   //game has started
 
         if (ev.getKeyCode() == KeyEvent.VK_DOWN) {
             // AMD: commented out: System.out.println("down key");
-            moveDown();
+            HumanPaddle.moveDown();
         }
         if (ev.getKeyCode() == KeyEvent.VK_UP) {
             // AMD: commented out: System.out.println("up key");
-            moveUp();
+            HumanPaddle.moveUp();
         }
         // AMD: added handler to detect spacebar
         if (ev.getKeyCode() == KeyEvent.VK_SPACE) {
-            //restart the game if gameOver is true
-            if (Main.restartable) {
-                restartGame();
+            //restart the game if restartable is true
+            if (GameDisplay.restartable) {
+                GameDisplay.restartGame();
             }
         }
 
@@ -47,25 +47,4 @@ public class KeyHandler implements KeyListener {
         ev.getComponent().repaint();   //This calls paintComponent(Graphics g) again
     }
 
-    private void moveDown() {
-        //Coordinates decrease as you go up the screen, that's why this looks backwards.
-        if (HumanPaddle.PaddleY < Main.screenSize - HumanPaddle.paddleSize) {
-            HumanPaddle.PaddleY+=HumanPaddle.PaddleMaxSpeed;
-        }
-    }
-
-    private void moveUp() {
-        //Coordinates increase as you go down the screen, that's why this looks backwards.
-        if (HumanPaddle.PaddleY > HumanPaddle.paddleSize) {
-            HumanPaddle.PaddleY-=HumanPaddle.PaddleMaxSpeed;
-        }
-    }
-
-    private void restartGame() {
-        // AMD: Restarts the game - keylistener will listen for SPACEBAR to restart.
-        Main.restartable = false;
-        Main.timer.start();
-        Ball.ballX = Main.screenSize / 2;
-        Ball.ballY = Main.screenSize / 2;
-    }
 }
