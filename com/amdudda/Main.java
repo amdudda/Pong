@@ -48,23 +48,7 @@ public class Main {
 
         //Below, we'll create and start a timer that notifies an ActionListener every time it ticks
         //First, need to create the listener:
-        ActionListener gameUpdater = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                //gameUpdater is an inner class
-                //It's containing class is Main
-                //moveBall() and moveComputerPaddle belong to the outer class - Main
-                //So we have to say Main.moveBall() to refer to these methods
-                Ball.moveBall();
-                ComputerPaddle.movePaddle();
-
-                if (gameOver) {
-                    timer.stop();
-                }
-                gamePanel.repaint();
-            }
-        };
+        gameClock gameUpdater = new gameClock();
 
         timer = new Timer(gameSpeed, gameUpdater);
         timer.start();    //Every time the timer ticks, the actionPerformed method of the ActionListener is called
