@@ -12,16 +12,8 @@ public class GameDisplay extends JPanel {
     static int computerScore = 0;
     static boolean removeInstructions = false;  // Same as above
     // AMD: and a variable to track whether a game can be restarted - using gameOver
-    // results in scoring-on-every-event and restart-at-all-spacebar-keyPressed bugs.
+    // results in scoring-on-every-event and restart-at-all-spacebars-keyPressed bugs.
     static boolean restartable = false;
-
-    protected static void restartGame() {
-        // AMD: Restarts the game - keylistener will listen for SPACEBAR to restart.
-        GameDisplay.restartable = false;
-        Main.timer.start();
-        Ball.ballX = Main.screenSize / 2;
-        Ball.ballY = Main.screenSize / 2;
-    }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -90,4 +82,11 @@ public class GameDisplay extends JPanel {
 
     }
 
+    protected static void restartGame() {
+        // AMD: Restarts the game - keylistener will listen for SPACEBAR to restart.
+        restartable = false;
+        Main.timer.start();
+        Ball.ballX = Main.screenSize / 2;
+        Ball.ballY = Main.screenSize / 2;
+    }
 }

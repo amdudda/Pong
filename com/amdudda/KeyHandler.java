@@ -30,10 +30,12 @@ public class KeyHandler implements KeyListener {
             // AMD: commented out: System.out.println("down key");
             HumanPaddle.moveDown();
         }
+
         if (ev.getKeyCode() == KeyEvent.VK_UP) {
             // AMD: commented out: System.out.println("up key");
             HumanPaddle.moveUp();
         }
+
         // AMD: added handler to detect spacebar
         if (ev.getKeyCode() == KeyEvent.VK_SPACE) {
             //restart the game if restartable is true
