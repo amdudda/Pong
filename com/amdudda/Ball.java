@@ -79,7 +79,7 @@ public class Ball {
         //Hit computer paddle?
         boolean ballYBetweenComputerPaddleEnds = ballY > ComputerPaddle.PaddleY - ComputerPaddle.paddleSize && ballY < ComputerPaddle.PaddleY + ComputerPaddle.paddleSize;
         boolean ballReachedComputerPaddlePosition = ballX <= ComputerPaddle.paddleDistanceFromSide;
-
+        boolean ballTouchHumanWall = ballX + ballSize >= scrnsz;
         if  (ballReachedComputerPaddlePosition && ballYBetweenComputerPaddleEnds) {
             hitComputerPaddle = true;
             // AMD: set lastPaddle value to represent computer
