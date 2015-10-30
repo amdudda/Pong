@@ -61,14 +61,18 @@ public class GameDisplay extends JPanel {
             //While game is playing, these methods draw the ball, paddles, using the global variables
             //Other parts of the code will modify these variables
 
-            //Ball - a circle is just an oval with the height equal to the width
+
             /* AMD:
                 Set the drawing color to red, use fill oval instead of drawOval,
                 and then reset the color back to blue.
              */
+            Ball.draw(g);
+            /*
+            AMD: Replaced the lines below with Ball.draw(g) above.
             g.setColor(Color.red);
             g.drawOval((int) Ball.ballX, (int) Ball.ballY, Ball.ballSize, Ball.ballSize);
             g.fillOval((int) Ball.ballX, (int) Ball.ballY, Ball.ballSize, Ball.ballSize);
+            */
             g.setColor(Color.blue);
             //Computer paddle
             g.drawLine(ComputerPaddle.paddleDistanceFromSide, ComputerPaddle.PaddleY - ComputerPaddle.paddleSize, ComputerPaddle.paddleDistanceFromSide, ComputerPaddle.PaddleY + ComputerPaddle.paddleSize);

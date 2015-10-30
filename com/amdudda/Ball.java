@@ -1,5 +1,6 @@
 package com.amdudda;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +27,13 @@ public class Ball {
     //static double ballDirection = 0;   //heading right
     //static double ballDirection = Math.PI;   //heading left
 
-
-    // fetches location of a ball
-    public void getLocation() {
-        // TODO: return a set of values that can be used to draw a ball.  Or should I make the ball draw itself?
-
+    // Draws the ball
+    public static void draw(Graphics g) {
+        // DONE: return a set of values that can be used to draw a ball.  Or should I make the ball draw itself?
+        g.setColor(Color.red);
+        //Ball - a circle is just an oval with the height equal to the width
+        g.drawOval((int) ballX, (int) ballY, ballSize, ballSize);
+        g.fillOval((int) ballX, (int) ballY, ballSize, ballSize);
     }
 
     //Checks to see if the ball has hit a wall or paddle
