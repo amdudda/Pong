@@ -67,6 +67,7 @@ public class Ball {
         width + 1 pixels wide and height +1 high, which is not what the commonly-found descriptions imply; they imply it's _inside_ a box
         that is h*w in size.  Does adding 1 to our ballSize for the x coordinate help with the bug? No.
         */
+
         boolean ballYBetweenHumanPaddleEnds = ballY > HumanPaddle.PaddleY - HumanPaddle.paddleSize && ballY < HumanPaddle.PaddleY + HumanPaddle.paddleSize;
         boolean ballReachedHumanPaddlePosition = ballX + ballSize >= scrnsz - (HumanPaddle.paddleDistanceFromSide);
         if (ballReachedHumanPaddlePosition && ballYBetweenHumanPaddleEnds) {
@@ -76,7 +77,10 @@ public class Ball {
         }
 
         //Hit computer paddle?
-        if (ballX <= ComputerPaddle.paddleDistanceFromSide && (ballY > ComputerPaddle.PaddleY-ComputerPaddle.paddleSize && ballY < ComputerPaddle.PaddleY+ComputerPaddle.paddleSize)) {
+        boolean ballYBetweenComputerPaddleEnds = ballY > ComputerPaddle.PaddleY - ComputerPaddle.paddleSize && ballY < ComputerPaddle.PaddleY + ComputerPaddle.paddleSize;
+        boolean ballReachedComputerPaddlePosition = ballX <= ComputerPaddle.paddleDistanceFromSide;
+
+        if  (ballReachedComputerPaddlePosition && ballYBetweenComputerPaddleEnds) {
             hitComputerPaddle = true;
             // AMD: set lastPaddle value to represent computer
             lastPaddle = "c";
