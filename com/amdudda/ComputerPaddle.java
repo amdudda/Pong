@@ -1,5 +1,7 @@
 package com.amdudda;
 
+import java.awt.*;
+
 /**
  * Created by tk0654wm on 10/29/2015.
  */
@@ -9,7 +11,12 @@ public class ComputerPaddle extends Paddle {
     static int PaddleMaxSpeed = 3;   //Max number of pixels that computer paddle can move clock tick. Higher number = easier for computer
     static int PaddleY = Main.screenSize / 2 ;    //location of the center of the paddles on the Y-axis of the screen
 
+    protected static void draw(Graphics g) {
+        // draws the paddle
+        g.setColor(Color.blue);  // be really sure our drawing line is blue.
+        g.drawLine(paddleDistanceFromSide, PaddleY - paddleSize, paddleDistanceFromSide, PaddleY + paddleSize);
 
+    }
 
     //Uses the current position of ball and paddle to move the computer paddle towards the ball
     protected static void movePaddle(){

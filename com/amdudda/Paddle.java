@@ -1,5 +1,7 @@
 package com.amdudda;
 
+import java.awt.*;
+
 /**
  * Created by tk0654wm on 10/29/2015.
  */
@@ -14,8 +16,12 @@ public abstract class Paddle {
 
     // no constructor
 
-    // getter and setter for score
+    // all Paddles need to know how to draw themselves
+    // GameDisplay complains that this is non-static in a static method - not sure why?
+    // workaround is to create static methods for now
+    // protected abstract void draw(Graphics g);
 
+    // getter and setter for score
     public int getScore() {
         return score;
     }
