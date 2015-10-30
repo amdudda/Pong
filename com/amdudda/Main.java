@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 
 //TODO have paddle speed affect ball's direction
 //TODO known issue - sometimes ball gets stuck behind human paddle
+// AMD: the ball also occasionally gets stuck behind the computer paddle, although this is MUCH less common.
 
 public class Main {
 

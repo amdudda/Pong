@@ -61,7 +61,12 @@ public class Ball {
 
         //If ballX is at a paddle AND ballY is within the paddle size.
         //Hit human paddle?
-        // AMD: Converted booleans to variables to make this easier to read - I suspect this is where the "trapped behind human paddle" bug arises
+        /*
+        AMD: Converted booleans to variables to make this easier to read - I suspect this is where the "trapped behind human paddle" bug arises
+        http://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#drawOval%28int,%20int,%20int,%20int%29 says the oval is
+        width + 1 pixels wide and height +1 high, which is not what the commonly-found descriptions imply; they imply it's _inside_ a box
+        that is h*w in size.  Does adding 1 to our ballSize for the x coordinate help with the bug? No.
+        */
         boolean ballYBetweenHumanPaddleEnds = ballY > HumanPaddle.PaddleY - HumanPaddle.paddleSize && ballY < HumanPaddle.PaddleY + HumanPaddle.paddleSize;
         boolean ballReachedHumanPaddlePosition = ballX + ballSize >= scrnsz - (HumanPaddle.paddleDistanceFromSide);
         if (ballReachedHumanPaddlePosition && ballYBetweenHumanPaddleEnds) {
