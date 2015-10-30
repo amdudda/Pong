@@ -40,7 +40,7 @@ public class Main {
         timer = new Timer(gameSpeed, gameUpdater);
         timer.start();    //Every time the timer ticks, the actionPerformed method of the ActionListener is called
         // AMD: ActionListener cited above now = gameClock object.
-        // AMD: one nagging problem I see is that the game exit condition is currently buried in the GameDisplay object.
+        // AMD: one nagging problem I see is that the game ending condition is currently buried in the GameDisplay object.
     }
 
     public static void initializeGame() {
