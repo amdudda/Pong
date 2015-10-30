@@ -61,7 +61,10 @@ public class Ball {
 
         //If ballX is at a paddle AND ballY is within the paddle size.
         //Hit human paddle?
-        if (ballX >= scrnsz-(HumanPaddle.paddleDistanceFromSide+(ballSize)) && (ballY > HumanPaddle.PaddleY-HumanPaddle.paddleSize && ballY < HumanPaddle.PaddleY+HumanPaddle.paddleSize)) {
+        // AMD: Converted booleans to variables to make this easier to read - I suspect this is where the "trapped behind human paddle" bug arises
+        boolean ballYBetweenHumanPaddleEnds = ballY > HumanPaddle.PaddleY - HumanPaddle.paddleSize && ballY < HumanPaddle.PaddleY + HumanPaddle.paddleSize;
+        boolean ballReachedHumanPaddlePosition = ballX + ballSize >= scrnsz - (HumanPaddle.paddleDistanceFromSide);
+        if (ballReachedHumanPaddlePosition && ballYBetweenHumanPaddleEnds) {
             hitHumanPaddle = true;
             // AMD: set lastPaddle value to represent human
             lastPaddle = "h";
