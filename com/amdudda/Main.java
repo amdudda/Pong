@@ -30,6 +30,20 @@ public class Main {
 
         gamePanel = new GameDisplay();
 
+        initializeGame();
+
+        //Below, we'll create and start a timer that notifies an ActionListener every time it ticks
+        //First, need to create the listener:
+        gameClock gameUpdater = new gameClock();
+
+        timer = new Timer(gameSpeed, gameUpdater);
+        timer.start();    //Every time the timer ticks, the actionPerformed method of the ActionListener is called
+        // AMD: ActionListener cited above now = gameClock object.
+    }
+
+    public static void initializeGame() {
+        // initialize game parameters not linked directly with other objects.
+
         JPanel content = new JPanel();
         content.setLayout(new BorderLayout());
         content.add(gamePanel, BorderLayout.CENTER);
@@ -45,13 +59,6 @@ public class Main {
 
         KeyHandler listener = new KeyHandler();
         window.addKeyListener(listener);
-
-        //Below, we'll create and start a timer that notifies an ActionListener every time it ticks
-        //First, need to create the listener:
-        gameClock gameUpdater = new gameClock();
-
-        timer = new Timer(gameSpeed, gameUpdater);
-        timer.start();    //Every time the timer ticks, the actionPerformed method of the ActionListener is called
     }
 
 }
