@@ -32,6 +32,7 @@ public class Main {
 
         initializeGame();
 
+        // AMD: the remaining three lines of code kick off the game.
         //Below, we'll create and start a timer that notifies an ActionListener every time it ticks
         //First, need to create the listener:
         gameClock gameUpdater = new gameClock();
@@ -39,6 +40,7 @@ public class Main {
         timer = new Timer(gameSpeed, gameUpdater);
         timer.start();    //Every time the timer ticks, the actionPerformed method of the ActionListener is called
         // AMD: ActionListener cited above now = gameClock object.
+        // AMD: one nagging problem I see is that the game exit condition is currently buried in the GameDisplay object.
     }
 
     public static void initializeGame() {
