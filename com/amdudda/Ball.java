@@ -51,8 +51,12 @@ public class Ball {
         boolean hitHumanPaddle = false;
         boolean hitComputerPaddle = false;
 
-        if (ballX <= 0 || ballX >= scrnsz ) {
+        // AMD: AHA!  Found "stuck behind wall" bug - the ball's far edge is ballX + ballSize, not just ballX.
+        if (ballX <= 0 || ballX + ballSize >= scrnsz ) {
             Main.gameOver = true;
+            // AMD: and, by the way, letting the ball touch the wall counts as a loss for scoring purposes.
+            if (ballX <= 0) lastPaddle = "h";  // computer's wall touched
+            else lastPaddle = "c";  // human's wall touched
             return;
         }
         if (ballY <= 0 || ballY >= scrnsz-ballSize) {
@@ -66,6 +70,7 @@ public class Ball {
         http://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#drawOval%28int,%20int,%20int,%20int%29 says the oval is
         width + 1 pixels wide and height +1 high, which is not what the commonly-found descriptions imply; they imply it's _inside_ a box
         that is h*w in size.  Does adding 1 to our ballSize for the x coordinate help with the bug? No.
+        FOUND THE BUG: see "AHA!" comment above.
         */
 
         boolean ballYBetweenHumanPaddleEnds = ballY > HumanPaddle.PaddleY - HumanPaddle.paddleSize && ballY < HumanPaddle.PaddleY + HumanPaddle.paddleSize;
